@@ -1,0 +1,45 @@
+html{
+    background-size: 100px;
+}
+body {
+    width: 410px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 30px;
+    font-family: Lucida Sans Unicode;
+    color: black;
+    background: linear-gradient(#2A3C9A, #64BFFF);
+}
+#form_box{
+    background-color: white;
+    padding: 20px;
+    width: 410px;
+}
+.box {
+    width : 410px;
+    height: 25px;
+    margin-bottom: 25px;
+}
+.msgErreur{
+    width : 410px;
+    text-align: right;
+    color : red;
+    font-size : 0.75em;
+}
+.boite{
+    float: right;
+}
+#inscription{
+    text-align: center;
+    padding-top: 10px;
+}
+#musique p {
+    text-align: center;
+    padding-top: 30px;
+}
+.music{
+    display: inline-block;
+    width: 130px;
+    text-align: right;
+}
