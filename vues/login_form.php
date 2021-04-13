@@ -19,7 +19,7 @@
         <div id="form_box">
             <div>
                 <!--action="index.html"-->
-                <form onsubmit="return verifForm(this)">
+                <form action="homepage.php" onsubmit="return verifForm(this)">
                     <p class="inscription">Vous êtes déjà inscrit?</p>
                     <div class="box">
                         <input class="boite" type="text" id="userIdLogin" onblur="verifPseudo(this, 'msgErreurIdLogin')" onfocus="this.value=''" value=" Nom d'utilisateur"/>
