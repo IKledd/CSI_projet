@@ -1,3 +1,13 @@
+<?php
+     try {
+    $db = new PDO("pgsql:host=localhost;dbname=projet_CSI","postgres","root",array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    echo "Connected to db :D";
+} catch (PDOException $e) {
+    echo $e->getMessage();
+}
+?>
+
+<!DOCTYPE html>
 <html>
     <head>
         <title>Login - Sign in</title>
@@ -8,7 +18,8 @@
     <body>
         <div id="form_box">
             <div>
-                <form action="index.html" onsubmit="return verifForm(this)">
+                <!--action="index.html"-->
+                <form onsubmit="return verifForm(this)">
                     <p class="inscription">Vous êtes déjà inscrit?</p>
                     <div class="box">
                         <input class="boite" type="text" id="userIdLogin" onblur="verifPseudo(this, 'msgErreurIdLogin')" onfocus="this.value=''" value=" Nom d'utilisateur"/>
