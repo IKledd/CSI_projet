@@ -2,39 +2,44 @@
     <head>
         <title>Login - Sign in</title>
         <link rel="stylesheet" type="text/css" href="login_form.css">
+        <script type="text/javascript" src="login_form.js"></script>
     </head>
     <body>
-        <div  id="form_box">
+        <div id="form_box">
             <div>
                 <form action="index.html" onsubmit="return verifForm(this)">
                     <p class="inscription">Vous êtes déjà inscrit?</p>
                     <div class="box">
-                        <input class="boite" type="text" name="user_id" onblur="verifPseudo(this)" value="Nom d'utilisateur"/>
-                        <div class="msgErreur" id="msgErreurId"></div>
+                        <input class="boite" type="text" id="userIdLogin" onblur="verifPseudo(this, 'msgErreurIdLogin')" onfocus="this.value=''" value=" Nom d'utilisateur"/>
+                        <div class="msgErreur" id="msgErreurIdLogin"></div>
                     </div>
                     <div class="box">
-                        <input class="boite" type="text" name="user_mdp" onblur="verifmdp(this)" value="Mot de passe"/>
-                        <div class="msgErreur" id="msgErreurMdp"></div>
+                        <input class="boite" type="text" onfocus="this.value=''" onblur="verifmdp(this, 'msgErreurMdpLogin')" value=" Mot de passe"/>
+                        <div class="msgErreur" id="msgErreurMdpLogin"></div>
                     </div>
-                    <input type="submit" value="Connexion" />
+                    <input class="submit" type="submit" value="Connexion" />
                 </form>
             </div>
             <div>
                 <form id="connexion" onsubmit="return verifStyleMus(this)">
                     <p class="inscription">Creer un compte !</p>
                     <div class="box">
-                        <input class="boite" type="text" name="user_id" onblur="verifPseudo(this)" value="Nom d'utilisateur"/>
+                        <input class="boite" type="text" onblur="verifPseudo(this, 'msgErreurIdCreate')"  onfocus="this.value=''" value=" Nom d'utilisateur"/>
+                        <div class="msgErreur" id="msgErreurIdCreate"></div>
                     </div>
                     <div class="box">
-                        <input class="boite" type="text" name="user_mdp" onblur="verifmdp(this)" value="Mot de passe"/>
+                        <input class="boite" type="text" onblur="verifmdp(this, 'msgErreurMdpCreate')" onfocus="this.value=''" value=" Mot de passe"/>
+                        <div class="msgErreur" id="msgErreurMdpCreate"></div>
                     </div>
                     <div class="box">
-                        <input class="boite" type="text" name="user_confMdp" onblur="verifmdp(this)" value="Confirmer le mot de passe"/>
+                        <input class="boite" type="text" onblur="verifmdp(this, 'msgErreurMdpConfCreate')"  onfocus="this.value=''" value=" Confirmer le mot de passe"/>
+                        <div class="msgErreur" id="msgErreurMdpConfCreate"></div>
                     </div>
                     <div class="box">
-                        <input class="boite" type="email" name="user_email" onblur="verifmdp(this)" value="Adresse e-mail"/>
+                        <input class="boite" type="email" onfocus="this.value=''" value=" Adresse e-mail"/>
+                        <div class="msgErreur" id="msgErreurMailCreate"></div>
                     </div>
-                    <input type="submit" value="Creer un compte" />
+                    <input class="submit" type="submit" value=" Creer un compte" />
                 </form>
             </div>
         </div>

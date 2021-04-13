@@ -1,6 +1,3 @@
-html{
-    background-size: 100px;
-}
 body {
     width: 100%;
     margin: auto;
@@ -22,36 +19,45 @@ body {
     margin-left: 33%;
     margin-right: 33%;
     margin-top: 80px;
-    background-color: white;
+    background-color: rgba(233, 233, 255, 0.5);
+    box-shadow: -14px 14px 16px -4px rgba(0,0,0,0.33);
     padding: 20px;
+    padding-top: 0px;
     width: 33%;
     z-index: 100;
+    color: white;
 }
 .box {
-    width : 95%;
-    height: 25px;
-    margin-bottom: 25px;
+    width : 100%;
+    height: auto;
+    min-height: 50px;
 }
 .msgErreur{
-    width : 410px;
+    width : 100%;
+    height: auto;
     text-align: right;
     color : red;
     font-size : 0.75em;
 }
 .boite{
-    height: 30px;;
+    height: 30px;
     width: 100%;
+    background-color: transparent;
+    color : white;
+    border: 1px solid white;
+    border-radius: 3px;
 }
 .inscription{
     text-align: center;
     padding-top: 10px;
 }
-#musique p {
-    text-align: center;
-    padding-top: 30px;
-}
-.music{
-    display: inline-block;
-    width: 130px;
-    text-align: right;
+.submit{
+    margin-left: 10%;
+    margin-right: 10%;
+    vertical-align: center;
+    width: 80%;
+    height: 30px;
+    border: none;
+    background-color: rgba(44, 44, 66);
+    color: white;
 }
