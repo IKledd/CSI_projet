@@ -2,22 +2,33 @@ html{
     background-size: 100px;
 }
 body {
-    width: 410px;
+    width: 100%;
     margin: auto;
-    margin-top: 20px;
     margin-bottom: 20px;
     padding-bottom: 30px;
     font-family: Lucida Sans Unicode;
     color: black;
-    background: linear-gradient(#2A3C9A, #64BFFF);
+}
+#backgroundImage{
+    width: 100%;
+    height: 200%;
+    background-image: url("../Images/login_background.jpg");
+    background-size: cover;
+    filter: blur(20px);
+    z-index: 1;
 }
 #form_box{
+    position: absolute;
+    margin-left: 33%;
+    margin-right: 33%;
+    margin-top: 80px;
     background-color: white;
     padding: 20px;
-    width: 410px;
+    width: 33%;
+    z-index: 100;
 }
 .box {
-    width : 410px;
+    width : 95%;
     height: 25px;
     margin-bottom: 25px;
 }
@@ -28,9 +39,10 @@ body {
     font-size : 0.75em;
 }
 .boite{
-    float: right;
+    height: 30px;;
+    width: 100%;
 }
-#inscription{
+.inscription{
     text-align: center;
     padding-top: 10px;
 }
