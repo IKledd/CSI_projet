@@ -17,9 +17,9 @@ function deleteText(id) {
 
 function verifPseudo(champ, id) {
     "use strict";
-    if (champ.value.length < 4) {
+    if (champ.value.length < 8) {
         surligne(champ, true, id);
-        document.getElementById(id).innerHTML = "*Le nom d'utilisateur dois contenir au moins 4 caractères";
+        document.getElementById(id).innerHTML = "*Le nom d'utilisateur dois contenir au moins 8 caractères";
         return false;
     } else {
         surligne(champ, false, id);
