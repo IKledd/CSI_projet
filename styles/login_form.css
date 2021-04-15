@@ -49,7 +49,7 @@ body {
     border-radius: 3px;
 }
 .boite::placeholder{
-    color: red;
+    color: white;
 }
 .inscription{
     text-align: center;

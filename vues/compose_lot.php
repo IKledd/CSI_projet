@@ -10,13 +10,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Home page</title>
+        <title>Composer votre lot</title>
         <link rel="stylesheet" type="text/css" href="../styles/homePage.css">
         <meta charset="utf-8"/>
     </head>
     <body>
         <div id="menuBar">
-            <div id="actualPage" class="menuButton"> Vendre
+            <div class="menuButton"> Vendre
                 
             </div>
             <div class="menuButton"> Rechercher
@@ -25,7 +25,7 @@
             <div class="menuButton"> Autre
                 
             </div>
-            <div class="menuButton"> Composer un lot
+            <div id="actualPage" class="menuButton"> Composer un lot
                 
             </div>
         </div>

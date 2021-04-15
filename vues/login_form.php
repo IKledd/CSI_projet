@@ -29,7 +29,7 @@
                         <input class="boite" type="text" placeholder="Mot de passe" onblur="verifmdp(this, 'msgErreurMdpLogin')"/>
                         <div class="msgErreur" id="msgErreurMdpLogin"></div>
                     </div>
-                    <input class="submit" type="submit"/>
+                    <input class="submit" type="submit" value="Se connecter"/>
                 </form>
             </div>
             <div>
@@ -51,7 +51,7 @@
                         <input class="boite" type="email" placeholder="Adresse e-mail" name="userMailCreate"/>
                         <div class="msgErreur" id="msgErreurMailCreate"></div>
                     </div>
-                    <input class="submit" type="submit"/>
+                    <input class="submit" type="submit" value="Creer un compte"/>
                 </form>
             </div>
         </div>
