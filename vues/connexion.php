@@ -41,11 +41,11 @@
                 <form action="../fonctions/traitementConnexion.php" method="post" onsubmit="verifForm(this)">
                     <div class="form-group">
                         <label for="login_conn" class="col-form-label">Login</label>
-                        <input type="text" class="form-control" name="login_conn" id="login_conn" maxlength="256" required onblur="verifPseudo(this, 'msgErreurIdLogin')"/>
+                        <input type="text" class="form-control" name="login_conn" id="login_conn" minlength="8" maxlength="16" required onblur="verifPseudo(this, 'msgErreurIdLogin')"/>
                         <div class="msgErreur" class="form-control" id="msgErreurIdLogin"></div>
                         
                         <label for="pwd_conn" class="col-form-label">Mot de passe</label>
-                        <input type="password" class="form-control" name="pwd_conn" id="pwd_conn" required onblur="verifmdp(this, 'msgErreurMdpLogin')" maxlength="256" required/>
+                        <input type="password" class="form-control" name="pwd_conn" id="pwd_conn" required onblur="verifmdp(this, 'msgErreurMdpLogin')" minlength="8" maxlength="16" required/>
                         <div class="msgErreur" class="form-control" id="msgErreurMdpLogin"></div>
                     
                         <input type="submit" value="Se connecter" class="btn btn-outline-success"/>
@@ -60,7 +60,7 @@
                     <form method="post" action="../fonctions/traitementConnexion.php" onsubmit="return verifForm(this, 'msgErreurIdCreate', 'msgErreurMdpCreate')">
                         <div class="form-group">
                             <label for="login" class="col-form-label">Login</label>
-                            <input type="text" class="form-control" name="login" id="login" required onblur="verifPseudo(this, 'msgErreurIdCreate')"/>
+                            <input type="text" class="form-control" name="login" id="login" minlength="8" maxlength="16" required onblur="verifPseudo(this, 'msgErreurIdCreate')"/>
                             <div class="msgErreur" class="form-control" id="msgErreurIdCreate"></div>
 
                             <label for="name" class="col-form-label">Nom</label>
@@ -72,11 +72,11 @@
                             <div class="msgErreur" class="form-control" id="msgErreurIdCreate"></div>
 
                             <label for="pwd" class="col-form-label">Mot de passe</label>
-                            <input type="password" class="form-control" name="pwd" id="pwd" required onblur="verifmdp(this, 'msgErreurMdpCreate')"/>
+                            <input type="password" class="form-control" name="pwd" id="pwd" minlength="8" maxlength="16" required onblur="verifmdp(this, 'msgErreurMdpCreate')"/>
                             <div class="msgErreur" class="form-control" id="msgErreurMdpCreate"></div>
 
                             <label for="pwd_conf" class="col-form-label">Confirmez votre mot de passe</label>
-                            <input type="password" class="form-control" name="pwd_conf" id="pwd_conf" required onblur="verifmdp(this, 'msgErreurMdpConfCreate')"/>
+                            <input type="password" class="form-control" name="pwd_conf" id="pwd_conf" minlength="8" maxlength="16" required onblur="verifmdp(this, 'msgErreurMdpConfCreate')"/>
                             <div class="msgErreur" class="form-control" id="msgErreurMdpConfCreate"></div>
 
                             <input type="submit" value="Créer un compte" class="btn btn-outline-success"/>
