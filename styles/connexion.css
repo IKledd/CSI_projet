@@ -1,0 +1,23 @@
+span {
+    color: red;
+    font-size: 0.9em;
+}
+
+#contain {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#div_connection{
+   
+    width: 50%;
+}
+#div_submit{
+   
+    width: 50%;
+}
+
+.jumbotron{
+    padding: 1rem 2rem !important;
+    border : solid 1px;
+}

@@ -18,18 +18,16 @@
             $_SESSION['user'] = 'gestionnaire';
             $_SESSION['pseudo'] = $login;
            echo 'gestionnaire';
-            header('Location: ../vues/compose_lot.php');
+            header('Location: ../vues/general_gestionnaire.php');
         }else if ($result['connexion']=='client') {
             //variable de session à ajouter
             $_SESSION['user'] = "client";
             $_SESSION['pseudo'] = $login;
-          // echo $_SESSION['user'] . $_SESSION['id'];
-            header('Location: ../vues/homepage.php');
-            //header('Location: ../vues/login_form.php');
+            header('Location: ../vues/general_client.php');
         } else {
             echo 'non';
             //Cas mot de passe incorrect
-            header('Location: ../vues/login_form.php?loginerror=true');
+            header('Location: ../vues/connexion.php?loginerror=true');
         }
     } else if(isset($_POST['login']) && isset($_POST['name']) && isset($_POST['first_name']) && isset($_POST['pwd']) && isset($_POST['pwd_conf'])){
         //Cas de l'inscription : on va toujours retouner sur la page connexion pour se connecter
@@ -41,7 +39,7 @@
 
         if($pwd != $pwd_conf){
             echo 'erreur';
-            header('Location: ../vues/login_form.php?loginerror=true');
+            header('Location: ../vues/connexion.php?loginerror=true');
             //faire erreur
         }else{
             $bdd = Bdd::getBdd();
@@ -50,8 +48,8 @@
             $req=$bdd->prepare($sql);
             $req->execute();
                   
-            header('Location: ../vues/login_form.php');
+            header('Location: ../vues/connexion.php');
         }       
     }else{
-        header('Location: ../vues/login_form.php');
+        header('Location: ../vues/connexion.php');
     }

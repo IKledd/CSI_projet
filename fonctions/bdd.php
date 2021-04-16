@@ -7,7 +7,7 @@ class Bdd
         private function __construct()
         {
             try {
-                Bdd::$bddConnection = new PDO("pgsql:host=localhost;dbname=projet_csi_groupe_11","postgres","ernesto",array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                Bdd::$bddConnection = new PDO("pgsql:host=localhost;dbname=projet_csi_groupe_11","postgres","root",array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
             } catch (PDOException $ex) {
                 die('Impossible de joindre la base de données');
             }
@@ -19,14 +19,6 @@ class Bdd
                 Bdd::$bddObject = new Bdd();
             }
             return Bdd::$bddConnection;
-        }
-
-        public static function getConnection()
-        {
-            if (Bdd::$bddConnection != null) { // Si aucune connexion existe alors on en créé une sinon on retourne celle existante
-                 return Bdd::$bddConnection;
-            }
-            return null;
         }
     }
 ?>
