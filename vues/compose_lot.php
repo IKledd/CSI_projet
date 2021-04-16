@@ -86,5 +86,7 @@
         </form>
     </div>
 
+    <input type="button" value="Se déconnecter" onclick="javascript:location.href='./login_form.php'" class="btn btn-outline-danger">
+
     </body>
 </html>
