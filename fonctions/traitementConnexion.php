@@ -18,13 +18,13 @@
             $_SESSION['user'] = 'gestionnaire';
             $_SESSION['pseudo'] = $login;
            echo 'gestionnaire';
-            header('Location: ../vues/homepage.php');
+            header('Location: ../vues/compose_lot.php');
         }else if ($result['connexion']=='client') {
             //variable de session à ajouter
             $_SESSION['user'] = "client";
             $_SESSION['pseudo'] = $login;
           // echo $_SESSION['user'] . $_SESSION['id'];
-            header('Location: ../vues/compose_lot.php');
+            header('Location: ../vues/homepage.php');
             //header('Location: ../vues/login_form.php');
         } else {
             echo 'non';
