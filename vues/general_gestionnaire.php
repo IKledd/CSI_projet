@@ -23,32 +23,32 @@
         <div id="menuBar">
             <div class="menuButton">
                 <legend><center>Nouveau produit</center></legend>
-                <form method="get" action="">
+                <form method="post" action="../fonctions/traitementGestionnaire.php">
                             
-                    <label class="label_form" for="login_conn">Marque</label>
-                    <input class="form_input" type="text" name="login_conn" id="login_conn"/>
-                    <label class="label_form" for="login_conn">Prix initial</label>
-                    <input class="form_input" type="text" name="login_conn" id="login_conn"/>
-                    <select type="text" class="form-control" id="type_prod">
-                        <?php/*
+                    <label class="label_form" for="marque">Marque</label>
+                    <input class="form_input" type="text" name="marque" id="marque"/>
+                    <label class="label_form" for="prix">Prix initial</label>
+                    <input class="form_input" type="text" name="prix" id="prix"/>
+                    <select type="text" class="form-control" name="type_prod" id="type_prod">
+                        <?php
                             $bdd = Bdd::getBdd();
-                            $sql ="SELECT select tprod_id, tprod_libelle from t_type_produit_tprod";
+                            $sql ="SELECT tprod_id, tprod_libelle from t_type_produit_tprod";
                             echo $sql;
                             $req=$bdd->prepare($sql);
                             $req->execute();
                             echo "<option selected disabled>Type du produit</option>";
                             while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
                                 echo "<option value='" . $row['tprod_id'] . "'>";
-                                echo "n°: ".$row['tprod_id']." : " .$row['tprod_libelle'];
+                                echo "n° ".$row['tprod_id']." : " .$row['tprod_libelle'];
                                 echo "</option>";   
-                            }*/
+                            }
                         ?>
                     </select>
                     <input type="submit" value="Creer"/>
                 </form>
             </div>
             <div class="menuButton">
-                <legend><center>Nouveau produit</center></legend>
+                <legend><center>Nouveau lot</center></legend>
                 <form method="get" action="">
                             
                     <label class="label_form" for="login_conn">Marque</label>
@@ -56,9 +56,9 @@
                     <label class="label_form" for="login_conn">Prix initial</label>
                     <input class="form_input" type="text" name="login_conn" id="login_conn"/>
                     <select type="text" class="form-control" id="type_prod">
-                        <?php/*
+                        <?php
                             $bdd = Bdd::getBdd();
-                            $sql ="SELECT select tprod_id, tprod_libelle from t_type_produit_tprod";
+                            $sql ="SELECT tprod_id, tprod_libelle from t_type_produit_tprod";
                             echo $sql;
                             $req=$bdd->prepare($sql);
                             $req->execute();
@@ -67,14 +67,14 @@
                                 echo "<option value='" . $row['tprod_id'] . "'>";
                                 echo "n°: ".$row['tprod_id']." : " .$row['tprod_libelle'];
                                 echo "</option>";   
-                            }*/
+                            }
                         ?>
                     </select>
                     <input type="submit" value="Creer"/>
                 </form>
             </div>
             <div class="menuButton">
-                <legend><center>Nouveau produit</center></legend>
+                <legend><center>Mettre en vente un lot</center></legend>
                 <form method="get" action="">
                             
                     <label class="label_form" for="login_conn">Marque</label>
@@ -82,9 +82,9 @@
                     <label class="label_form" for="login_conn">Prix initial</label>
                     <input class="form_input" type="text" name="login_conn" id="login_conn"/>
                     <select type="text" class="form-control" id="type_prod">
-                        <?php/*
+                        <?php
                             $bdd = Bdd::getBdd();
-                            $sql ="SELECT select tprod_id, tprod_libelle from t_type_produit_tprod";
+                            $sql ="SELECT tprod_id, tprod_libelle from t_type_produit_tprod";
                             echo $sql;
                             $req=$bdd->prepare($sql);
                             $req->execute();
@@ -93,7 +93,7 @@
                                 echo "<option value='" . $row['tprod_id'] . "'>";
                                 echo "n°: ".$row['tprod_id']." : " .$row['tprod_libelle'];
                                 echo "</option>";   
-                            }*/
+                            }
                         ?>
                     </select>
                     <input type="submit" value="Creer"/>
