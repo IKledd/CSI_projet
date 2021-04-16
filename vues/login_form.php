@@ -12,8 +12,17 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Login - Sign in</title>
-        <!-- <link rel="stylesheet" type="text/css" href="../styles/login_form.css"> -->
+        <title>Connexion-Inscription</title>
+        <link rel="stylesheet" type="text/css" href="../styles/login_form.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
         <script type="text/javascript" src="../assets/login_form.js"></script>
         <meta charset="utf-8"/>
     </head>
@@ -23,49 +32,57 @@
                 echo "<span>Mot de passe incorrect</span></br>";
             }
         ?>
-        <div id="form_box">
-            <div id="div_connection">
-                <!--action="index.html"-->
+        <div id="contain">
+            <div id="div_connection" class="jumbotron">
+                <legend>
+                <center>Vous êtes déjà inscrit ?</center>
+                </legend>
                 <form action="../fonctions/traitementConnexion.php" method="post" onsubmit="verifForm(this)">
-                    <p>Vous êtes déjà inscrit?</p>
-                    <label for="login_conn">Login</label>
-                    <input type="text" name="login_conn" id="login_conn" maxlength="256" required onblur="verifPseudo(this, 'msgErreurIdLogin')"/>
-                    <div class="msgErreur" id="msgErreurIdLogin"></div>
+                    <div class="form-group">
+                        <label for="login_conn" class="col-form-label">Login</label>
+                        <input type="text" class="form-control" name="login_conn" id="login_conn" maxlength="256" required onblur="verifPseudo(this, 'msgErreurIdLogin')"/>
+                        <div class="msgErreur" class="form-control" id="msgErreurIdLogin"></div>
+                        
+                        <label for="pwd_conn" class="col-form-label">Mot de passe</label>
+                        <input type="password" class="form-control" name="pwd_conn" id="pwd_conn" required onblur="verifmdp(this, 'msgErreurMdpLogin')" maxlength="256" required/>
+                        <div class="msgErreur" class="form-control" id="msgErreurMdpLogin"></div>
                     
-                    <label for="pwd_conn">Mot de passe</label>
-                    <input type="password" name="pwd_conn" id="pwd_conn" required onblur="verifmdp(this, 'msgErreurMdpLogin')" maxlength="256" required/>
-                    <div class="msgErreur" id="msgErreurMdpLogin"></div>
-                
-                    <input type="submit" value="Se connecter"/>
+                        <input type="submit" value="Se connecter" class="btn btn-outline-success"/>
+                    </div>
                 </form>
             </div>   
-            <div>
-                <form method="post" action="../fonctions/traitementConnexion.php" onsubmit="return verifForm(this, 'msgErreurIdCreate', 'msgErreurMdpCreate')">
-                    <p>Creer un compte !</p>
+            
+                <div id="div_submit" class="jumbotron">
+                    <legend>
+                        <center>Créer un compte !</center>
+                    </legend>
+                    <form method="post" action="../fonctions/traitementConnexion.php" onsubmit="return verifForm(this, 'msgErreurIdCreate', 'msgErreurMdpCreate')">
+                        <div class="form-group">
+                            <label for="login" class="col-form-label">Login</label>
+                            <input type="text" class="form-control" name="login" id="login" required onblur="verifPseudo(this, 'msgErreurIdCreate')"/>
+                            <div class="msgErreur" class="form-control" id="msgErreurIdCreate"></div>
 
-                    <label for="login">Login</label>
-                    <input type="text" name="login" id="login" required onblur="verifPseudo(this, 'msgErreurIdCreate')"/>
-                    <div class="msgErreur" id="msgErreurIdCreate"></div>
+                            <label for="name" class="col-form-label">Nom</label>
+                            <input type="text" class="form-control" name="name" id="name" required/>
+                            <div class="msgErreur" class="form-control" id="msgErreurIdCreate"></div>
 
-                    <label for="name">Nom</label>
-                    <input type="text" name="name" id="name" required/>
-                    <div class="msgErreur" id="msgErreurIdCreate"></div>
+                            <label for="first_name" class="col-form-label">Prénom</label>
+                            <input type="text" class="form-control" name="first_name" id="first_name" required/>
+                            <div class="msgErreur" class="form-control" id="msgErreurIdCreate"></div>
 
-                    <label for="first_name">Prénom</label>
-                    <input type="text" name="first_name" id="first_name" required/>
-                    <div class="msgErreur" id="msgErreurIdCreate"></div>
+                            <label for="pwd" class="col-form-label">Mot de passe</label>
+                            <input type="password" class="form-control" name="pwd" id="pwd" required onblur="verifmdp(this, 'msgErreurMdpCreate')"/>
+                            <div class="msgErreur" class="form-control" id="msgErreurMdpCreate"></div>
 
-                    <label for="pwd">Mot de passe</label>
-                    <input type="password" name="pwd" id="pwd" required onblur="verifmdp(this, 'msgErreurMdpCreate')"/>
-                    <div class="msgErreur" id="msgErreurMdpCreate"></div>
+                            <label for="pwd_conf" class="col-form-label">Confirmez votre mot de passe</label>
+                            <input type="password" class="form-control" name="pwd_conf" id="pwd_conf" required onblur="verifmdp(this, 'msgErreurMdpConfCreate')"/>
+                            <div class="msgErreur" class="form-control" id="msgErreurMdpConfCreate"></div>
 
-                    <label for="pwd_conf">Confirmez votre mot de passe</label>
-                    <input type="password" name="pwd_conf" id="pwd_conf" required onblur="verifmdp(this, 'msgErreurMdpConfCreate')"/>
-                    <div class="msgErreur" id="msgErreurMdpConfCreate"></div>
-
-                    <input class="submit" type="submit" value="Creer un compte"/>
-                </form>
-            </div>
+                            <input type="submit" value="Créer un compte" class="btn btn-outline-success"/>
+                        </div>
+                    </form>
+                </div>
+            
         </div>
         <div id="backgroundImage">
         </div> 
