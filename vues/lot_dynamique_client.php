@@ -1,21 +1,14 @@
 <?php
-     try {
-        $db = new PDO("pgsql:host=localhost;dbname=projet_CSI","postgres","A157z874D",array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-        echo "Connected to db :D";
-    } catch (PDOException $e) {
-        echo $e->getMessage();
-    }
-
-    session_start();
-    if (isset($_SESSION['user']) || isset($_SESSION['pseudo']) ) {    
-        $_SESSION['user']='';
-        $_SESSION['id']='';
-    }  
-
-  require "../fonctions/bdd.php"; //bdd.php dbname mdp edited to work
-  $bdd = Bdd::getBdd();
-
-
+require "../fonctions/bdd.php";
+require "../fonctions/statusClient.php";
+$bdd = Bdd::getBdd();
+$lot = 1; 
+/*if(isset($_GET['lot_on_sale'])){
+   $lot = $_GET['lot_on_sale'];
+}
+else if(isset($_GET['lot_sold'])){
+    $lot = $_GET['lot_sold'];
+} */
 ?>
 
 
@@ -30,12 +23,16 @@
     
         <div id="showlot"> Lot numero 
         <?php 
-        $bdd = Bdd::getBdd();
-        $sql = "SELECT lot_id FROM t_lot_lot";
-        $result = $db->query($sql);
-        echo $result;
-        $req=$bdd->prepare($sql);
-        $req->execute();
+            $sql ="SELECT * FROM v_affichage_client WHERE lot_id= ".$lot;
+           // $sql ="SELECT afficher_lot_client(". $lot . ")";
+            echo $sql;
+            $req=$bdd->prepare($sql);
+            $req->execute();
+            while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+                echo "<option value='" . $row['lot_id'] . "'>";
+                echo $row['lot_id']." disponible jusque : " .$row['lot_date_fin_vente'];
+                echo "</option>";   
+                    }
         ?>
                 
             </div>
