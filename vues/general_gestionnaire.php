@@ -7,7 +7,7 @@
 <html>
     <head>
         <title>Composer votre lot</title>
-        <link rel="stylesheet" type="text/css" href="../styles/homePage.css">
+        <link rel="stylesheet" type="text/css" href="../styles/general_gestionnaire.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -21,6 +21,58 @@
     </head>
     <body>
         <div id="menuBar">
+            <div class="menuButton">
+                <legend><center>Nouveau produit</center></legend>
+                <form method="get" action="">
+                            
+                    <label class="label_form" for="login_conn">Marque</label>
+                    <input class="form_input" type="text" name="login_conn" id="login_conn"/>
+                    <label class="label_form" for="login_conn">Prix initial</label>
+                    <input class="form_input" type="text" name="login_conn" id="login_conn"/>
+                    <select type="text" class="form-control" id="type_prod">
+                        <?php/*
+                            $bdd = Bdd::getBdd();
+                            $sql ="SELECT select tprod_id, tprod_libelle from t_type_produit_tprod";
+                            echo $sql;
+                            $req=$bdd->prepare($sql);
+                            $req->execute();
+                            echo "<option selected disabled>Type du produit</option>";
+                            while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+                                echo "<option value='" . $row['tprod_id'] . "'>";
+                                echo "n°: ".$row['tprod_id']." : " .$row['tprod_libelle'];
+                                echo "</option>";   
+                            }*/
+                        ?>
+                    </select>
+                    <input type="submit" value="Creer"/>
+                </form>
+            </div>
+            <div class="menuButton">
+                <legend><center>Nouveau produit</center></legend>
+                <form method="get" action="">
+                            
+                    <label class="label_form" for="login_conn">Marque</label>
+                    <input class="form_input" type="text" name="login_conn" id="login_conn"/>
+                    <label class="label_form" for="login_conn">Prix initial</label>
+                    <input class="form_input" type="text" name="login_conn" id="login_conn"/>
+                    <select type="text" class="form-control" id="type_prod">
+                        <?php/*
+                            $bdd = Bdd::getBdd();
+                            $sql ="SELECT select tprod_id, tprod_libelle from t_type_produit_tprod";
+                            echo $sql;
+                            $req=$bdd->prepare($sql);
+                            $req->execute();
+                            echo "<option selected disabled>Type du produit</option>";
+                            while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+                                echo "<option value='" . $row['tprod_id'] . "'>";
+                                echo "n°: ".$row['tprod_id']." : " .$row['tprod_libelle'];
+                                echo "</option>";   
+                            }*/
+                        ?>
+                    </select>
+                    <input type="submit" value="Creer"/>
+                </form>
+            </div>
             <div class="menuButton">
                 <legend><center>Nouveau produit</center></legend>
                 <form method="get" action="">
@@ -95,7 +147,7 @@
 
     
 
-    <input type="button" value="Se déconnecter" onclick="javascript:location.href='./login_form.php'" class="btn btn-outline-danger">
+    <input type="button" value="Se déconnecter" onclick="javascript:location.href='./connexion.php'" class="btn btn-outline-danger">
 
     </body>
 </html>
