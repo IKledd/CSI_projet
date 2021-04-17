@@ -1,6 +1,6 @@
 <?php
     require "../fonctions/bdd.php";
-     
+    require "../fonctions/statusGestionnaire.php";
 ?>
 
 <!DOCTYPE html>
@@ -88,6 +88,14 @@
                 </form>
             </div>
             <div class="menuButton">
+                <?php
+                    if (isset($_GET['dateerror']) && $_GET['dateerror']) {
+                        echo "<span>Problème de choix dans la date</span></br>";
+                    }
+                    if (isset($_GET['priceerror']) && $_GET['priceerror']) {
+                        echo "<span>Le prix estimé doit-être supérieur au prix minimal</span></br>";
+                    }
+                ?>
                 <legend><center>Mettre en vente un lot</center></legend>
                 <form method="post" action="../fonctions/traitementGestionnaire.php">
                             

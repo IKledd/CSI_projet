@@ -44,14 +44,22 @@
             $prixMin = $_POST['prix_min'];
             $dateDebut = $_POST['dateDebut'];
             $dateFin = $_POST['dateFin'];
-            $bdd = Bdd::getBdd();
+            if($dateDebut>$dateFin){
+                header('Location: ../vues/general_gestionnaire?dateerror=true');
+            }else if($prixEst<$prixMin){
+                header('Location: ../vues/general_gestionnaire?priceerror=true');
+            }else{
+                
+                $bdd = Bdd::getBdd();
 
-             $sql ="call mise_en_vente_lot(" .$prixMin. ", " .$prixEst. ", '" .$dateFin. "', '" .$dateDebut. "')";
-            echo $sql;
-            $req=$bdd->prepare($sql);
-            $req->execute();
+                $sql ="call mise_en_vente_lot(" .$prixMin. ", " .$prixEst. ", '" .$dateFin. "', '" .$dateDebut. "')";
+                echo $sql;
+                $req=$bdd->prepare($sql);
+                $req->execute();
 
-            header('Location: ../vues/general_gestionnaire');
+                header('Location: ../vues/general_gestionnaire');
+            }
+            
         }
     } catch (Exception $e){
         header('Location: ../vues/general_gestionnaire');
