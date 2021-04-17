@@ -29,6 +29,8 @@
                     <input class="form_input" type="text" name="marque" id="marque"/>
                     <label class="label_form" for="prix">Prix initial</label>
                     <input class="form_input" type="text" name="prix" id="prix"/>
+                    <label class="label_form" for="dateSortie">Date de sortie </label>
+                    <input class="form_input" type="datetime-local" name="dateSortie" id="dateSortie"/>
                     <select type="text" class="form-control" name="type_prod" id="type_prod">
                         <?php
                             $bdd = Bdd::getBdd();
@@ -48,54 +50,55 @@
                 </form>
             </div>
             <div class="menuButton">
-                <legend><center>Nouveau lot</center></legend>
-                <form method="get" action="">
-                            
-                    <label class="label_form" for="login_conn">Marque</label>
-                    <input class="form_input" type="text" name="login_conn" id="login_conn"/>
-                    <label class="label_form" for="login_conn">Prix initial</label>
-                    <input class="form_input" type="text" name="login_conn" id="login_conn"/>
-                    <select type="text" class="form-control" id="type_prod">
+                <legend><center>Ajouter un produit à un lot</center></legend>
+                <form method="post" action="../fonctions/traitementGestionnaire.php">
+                    <select type="text" class="form-control" name="choix_lot" id="choix_lot">
                         <?php
                             $bdd = Bdd::getBdd();
-                            $sql ="SELECT tprod_id, tprod_libelle from t_type_produit_tprod";
+                            $sql ="SELECT distinct lot_id, lot_date_debut_vente, lot_date_fin_vente from t_lot_lot where lot_etat = 'en attente'";
                             echo $sql;
                             $req=$bdd->prepare($sql);
                             $req->execute();
-                            echo "<option selected disabled>Type du produit</option>";
+                            echo "<option selected disabled>Choisissez votre lot</option>";
                             while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
-                                echo "<option value='" . $row['tprod_id'] . "'>";
-                                echo "n°: ".$row['tprod_id']." : " .$row['tprod_libelle'];
+                                echo "<option value='" . $row['lot_id'] . "'>";
+                                echo "Lot n°".$row['lot_id']." - début: " .$row['lot_date_debut_vente']." - fin: " .$row['lot_date_fin_vente'];
                                 echo "</option>";   
                             }
                         ?>
                     </select>
-                    <input type="submit" value="Creer"/>
+                    <select type="text" class="form-control" name="choix_produit" id="choix_produit">
+                        <?php
+                            $bdd = Bdd::getBdd();
+                            $sql ="SELECT distinct on (prod_id) prod_id, prod_marque, prod_prix_initial, tprod_libelle from t_produit_prod, t_type_produit_tprod";
+                            echo $sql;
+                            $req=$bdd->prepare($sql);
+                            $req->execute();
+                            echo "<option selected disabled>Choisissez votre produit</option>";
+                            while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+                                echo "<option value='" . $row['prod_id'] . "'>";
+                                echo "Produit n°".$row['prod_id']." - " .$row['prod_marque']." - " .$row['prod_prix_initial']."€ - " .$row['tprod_libelle'];
+                                echo "</option>";   
+                            }
+                        ?>
+                    </select>
+                    <label class="label_form" for="quantite">Quantité</label>
+                    <input class="form_input" type="text" name="quantite" id="quantite"/>
+                    <input type="submit" value="Ajouter"/>
                 </form>
             </div>
             <div class="menuButton">
                 <legend><center>Mettre en vente un lot</center></legend>
-                <form method="get" action="">
+                <form method="post" action="../fonctions/traitementGestionnaire.php">
                             
-                    <label class="label_form" for="login_conn">Marque</label>
-                    <input class="form_input" type="text" name="login_conn" id="login_conn"/>
-                    <label class="label_form" for="login_conn">Prix initial</label>
-                    <input class="form_input" type="text" name="login_conn" id="login_conn"/>
-                    <select type="text" class="form-control" id="type_prod">
-                        <?php
-                            $bdd = Bdd::getBdd();
-                            $sql ="SELECT tprod_id, tprod_libelle from t_type_produit_tprod";
-                            echo $sql;
-                            $req=$bdd->prepare($sql);
-                            $req->execute();
-                            echo "<option selected disabled>Type du produit</option>";
-                            while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
-                                echo "<option value='" . $row['tprod_id'] . "'>";
-                                echo "n°: ".$row['tprod_id']." : " .$row['tprod_libelle'];
-                                echo "</option>";   
-                            }
-                        ?>
-                    </select>
+                    <label class="label_form" for="prix_est">Prix estimé (supérieur au prix minimal)</label>
+                    <input class="form_input" type="text" name="prix_est" id="prix_est"/>
+                    <label class="label_form" for="prix_min">Prix minimal</label>
+                    <input class="form_input" type="text" name="prix_min" id="prix_min"/>
+                    <label class="label_form" for="dateDebut">Date de début </label>
+                    <input class="form_input" type="datetime-local" name="dateDebut" id="dateDebut"/>
+                    <label class="label_form" for="dateFin">Date de fin </label>
+                    <input class="form_input" type="datetime-local" name="dateFin" id="dateFin"/>
                     <input type="submit" value="Creer"/>
                 </form>
             </div>
