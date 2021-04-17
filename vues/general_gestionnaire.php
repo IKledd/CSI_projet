@@ -28,7 +28,7 @@
                     <label class="label_form" for="marque">Marque</label>
                     <input class="form_input" type="text" name="marque" id="marque"/>
                     <label class="label_form" for="prix">Prix initial</label>
-                    <input class="form_input" type="text" name="prix" id="prix"/>
+                    <input class="form_input" type="number" step="0.01" min="0" name="prix" id="prix"/>
                     <label class="label_form" for="dateSortie">Date de sortie </label>
                     <input class="form_input" type="datetime-local" name="dateSortie" id="dateSortie"/>
                     <select type="text" class="form-control" name="type_prod" id="type_prod">
@@ -83,7 +83,7 @@
                         ?>
                     </select>
                     <label class="label_form" for="quantite">Quantité</label>
-                    <input class="form_input" type="text" name="quantite" id="quantite"/>
+                    <input class="form_input" type="number" step="1" min="0" name="quantite" id="quantite"/>
                     <input type="submit" value="Ajouter"/>
                 </form>
             </div>
@@ -92,9 +92,9 @@
                 <form method="post" action="../fonctions/traitementGestionnaire.php">
                             
                     <label class="label_form" for="prix_est">Prix estimé (supérieur au prix minimal)</label>
-                    <input class="form_input" type="text" name="prix_est" id="prix_est"/>
+                    <input class="form_input" type="number" step="0.01" min="0" name="prix_est" id="prix_est"/>
                     <label class="label_form" for="prix_min">Prix minimal</label>
-                    <input class="form_input" type="text" name="prix_min" id="prix_min"/>
+                    <input class="form_input" type="number" step="0.01" min="0" name="prix_min" id="prix_min"/>
                     <label class="label_form" for="dateDebut">Date de début </label>
                     <input class="form_input" type="datetime-local" name="dateDebut" id="dateDebut"/>
                     <label class="label_form" for="dateFin">Date de fin </label>
