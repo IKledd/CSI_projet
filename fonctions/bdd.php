@@ -9,7 +9,7 @@ class Bdd
             try {
                 Bdd::$bddConnection = new PDO("pgsql:host=localhost;dbname=projet_csi_groupe_11","postgres","root",array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
             } catch (PDOException $ex) {
-                die('Impossible de joindre la base de données');
+                die('Impossible de joindre la base de données : '. $ex->getMessage() );
             }
         }
         // Obtention de la connexion à la base de données

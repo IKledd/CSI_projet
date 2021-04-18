@@ -547,6 +547,14 @@ begin
     end if;
 end
 $$ language plpgsql;
+----- new supprimer propositions
+create  or replace procedure supprimer_propositions() as $$
+declare 
+begin
+delete from t_proposition_achat_pro
+where lot_id in (select lot_id from t_lot_lot where current_date > (lot_date_fin_vente + INTERVAL '1 DAY'));
+end
+$$ language plpgsql;
 
 --analyse des propositions
 create or replace procedure Analyse_propositions(id_lot integer) as $$
@@ -562,7 +570,7 @@ begin
         l_prix_plus_haut = 0 ;
         FOR proposition IN
            SELECT max(pro_prix_propose) prix_max, cli_pseudo FROM t_proposition_achat_pro
-            WHERE lot_id = 1
+            WHERE lot_id = id_lot;
             GROUP BY cli_pseudo ,pro_date_proposition
 			order by pro_date_proposition Asc 
         LOOP
