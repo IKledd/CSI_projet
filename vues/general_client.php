@@ -7,16 +7,24 @@
 <html>
     <head>
 		<title>client page</title>
-		<link rel="stylesheet" type="text/css" href="../styles/client.css">
+		<!-- <link rel="stylesheet" type="text/css" href="../styles/client.css"> -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous">
+    </script>
 		
 		
    
         <meta charset="utf-8"/>
     </head>
     <body>
-	<div class="row">
 
-        <div >
+        <div>
 		<div>
 		                <?php
                             $bdd = Bdd::getBdd();
@@ -34,20 +42,20 @@
                                 echo "</option>";   */
                             }
                         ?>
-                <h1>Modifier solde</h1>
+      			<?php echo "Solde : ". $com_solde ?>
                 <form method="post" action="../fonctions/traitementClient.php">
                             
-                    <label for="solde">Ajouter au solde</label>
-                    <input  type="text" name="com_solde" id="solde"/>
-                    <input type="hidden" name="com_compte" id="compte" value ="<?=$com_idcompte?>"/>
+                    <label for="solde" class="col-form-label">Ajouter au solde</label>
+                    <input  type="number"  name="com_solde" id="solde" class="form-control" step="0.01" min="0"/>
+                    <input type="hidden" name="com_compte" id="compte" class="col-form-label" value ="<?=$com_idcompte?>"/>
                     <input type="submit" value="Modifier"/>
 
                 </form>
-				Solde : <?php echo $com_solde ?>
+				
         </div>
-		<div ">
+		<div>
 		<br>
-			<h1>Lots à confirmer</h1>
+			<p>Lots à confirmer</p>
 			<table id="customers">
 				<tr>
 					<td>Lot N°</td>
@@ -77,11 +85,11 @@
 		</div>
 	</div>
 		<div id="actions">
-					<h1>Consulter les lots</h1>
+					
 
 				<div class='jumbotron'>
 					<legend>Sélectionner un lot en vente</legend><br>
-					<form method="get" action="./lot_dynamique_gestionnaire.php?>" id="form_on_sale">
+					<form method="get" action="./lot_dynamique_client.php?>" id="form_on_sale">
 						<select type="text" class="form-control" id="lot_on_sale" name="lot_on_sale" required onchange="document.getElementById('form_on_sale').submit();">
 							<?php
 								$bdd = Bdd::getBdd();
@@ -101,7 +109,7 @@
 
 				<div class='jumbotron'>
 					<legend>Sélectionner un lot vendu</legend><br>
-					<form method="get" action="./lot_dynamique_gestionnaire.php?>" id="form_sold">
+					<form method="get" action="./lot_dynamique_client.php?>" id="form_sold">
 						<select type="text" class="form-control" id="lot_sold" name="lot_sold" required onchange="document.getElementById('form_sold').submit();">
 						<?php
 							$bdd = Bdd::getBdd();
