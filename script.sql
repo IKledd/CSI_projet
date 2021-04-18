@@ -1,4 +1,4 @@
---CREATE DATABASE projet_csi_groupe_11;
+--CREATE DATABASE projet_CSI;
 
 -----------------------------------------------------------------
 --domaines
@@ -317,6 +317,16 @@ declare
 begin
 	insert into t_compte_courant_com(com_solde) values(solde);
 	return (select max(com_idcompte) from t_compte_courant_com);
+end
+$$ language plpgsql;
+
+--recupération des types de produits
+create or replace function recuperer_type_prod() returns record as $$
+declare
+	rec record;
+begin
+    SELECT tprod_id, tprod_libelle into rec from t_type_produit_tprod;
+	return rec;
 end
 $$ language plpgsql;
 
