@@ -1,4 +1,4 @@
---CREATE DATABASE projet_CSI;
+--CREATE DATABASE projet_csi_groupe_11;
 
 -----------------------------------------------------------------
 --domaines
