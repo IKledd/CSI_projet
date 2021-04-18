@@ -7,7 +7,7 @@
 <html>
     <head>
         <title>Composer votre lot</title>
-        <link rel="stylesheet" type="text/css" href="../styles/general_gestionnaire.css">
+        <link rel="stylesheet" type="text/css" href="../styles/general_gestionnaire.css"> 
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -20,17 +20,17 @@
         <meta charset="utf-8"/>
     </head>
     <body>
-        <div id="menuBar">
-            <div class="menuButton">
+        <div id="contain">
+             <div class="jumbotron" id="new_product">
                 <legend><center>Nouveau produit</center></legend>
                 <form method="post" action="../fonctions/traitementGestionnaire.php">
                             
-                    <label class="label_form" for="marque">Marque</label>
-                    <input class="form_input" type="text" name="marque" id="marque"/>
-                    <label class="label_form" for="prix">Prix initial</label>
-                    <input class="form_input" type="number" step="0.01" min="0" name="prix" id="prix"/>
-                    <label class="label_form" for="dateSortie">Date de sortie </label>
-                    <input class="form_input" type="datetime-local" name="dateSortie" id="dateSortie"/>
+                    <label class="col-form-label" for="marque">Marque</label>
+                    <input class="form-control" type="text" name="marque" id="marque"/>
+                    <label class="col-form-label" for="prix">Prix initial</label>
+                    <input class="form-control" type="number" step="0.01" min="0" name="prix" id="prix"/>
+                    <label class="col-form-label" for="dateSortie">Date de sortie </label>
+                    <input class="form-control" type="datetime-local" name="dateSortie" id="dateSortie"/></br>
                     <select type="text" class="form-control" name="type_prod" id="type_prod">
                         <?php
                             $bdd = Bdd::getBdd();
@@ -46,10 +46,10 @@
                             }
                         ?>
                     </select>
-                    <input type="submit" value="Creer"/>
+                    <input type="submit" class="btn btn-outline-success value="Creer"/>
                 </form>
             </div>
-            <div class="menuButton">
+             <div class="jumbotron" id="add_product_lot">
                 <legend><center>Ajouter un produit à un lot</center></legend>
                 <form method="post" action="../fonctions/traitementGestionnaire.php">
                     <select type="text" class="form-control" name="choix_lot" id="choix_lot">
@@ -67,6 +67,7 @@
                             }
                         ?>
                     </select>
+                    </br>
                     <select type="text" class="form-control" name="choix_produit" id="choix_produit">
                         <?php
                             $bdd = Bdd::getBdd();
@@ -83,11 +84,11 @@
                         ?>
                     </select>
                     <label class="label_form" for="quantite">Quantité</label>
-                    <input class="form_input" type="number" step="1" min="0" name="quantite" id="quantite"/>
-                    <input type="submit" value="Ajouter"/>
+                    <input class="form-control" type="number" step="1" min="0" name="quantite" id="quantite"/>
+                    <input type="submit" class="btn btn-outline-success value="Ajouter"/>
                 </form>
             </div>
-            <div class="menuButton">
+             <div class="jumbotron" id="new_lot">
                 <?php
                     if (isset($_GET['dateerror']) && $_GET['dateerror']) {
                         echo "<span>Problème de choix dans la date</span></br>";
@@ -100,20 +101,20 @@
                 <form method="post" action="../fonctions/traitementGestionnaire.php">
                             
                     <label class="label_form" for="prix_est">Prix estimé (supérieur au prix minimal)</label>
-                    <input class="form_input" type="number" step="0.01" min="0" name="prix_est" id="prix_est"/>
+                    <input class="form-control" type="number" step="0.01" min="0" name="prix_est" id="prix_est"/>
                     <label class="label_form" for="prix_min">Prix minimal</label>
-                    <input class="form_input" type="number" step="0.01" min="0" name="prix_min" id="prix_min"/>
+                    <input class="form-control" type="number" step="0.01" min="0" name="prix_min" id="prix_min"/>
                     <label class="label_form" for="dateDebut">Date de début </label>
-                    <input class="form_input" type="datetime-local" name="dateDebut" id="dateDebut"/>
+                    <input class="form-control" type="datetime-local" name="dateDebut" id="dateDebut"/>
                     <label class="label_form" for="dateFin">Date de fin </label>
-                    <input class="form_input" type="datetime-local" name="dateFin" id="dateFin"/>
-                    <input type="submit" value="Creer"/>
+                    <input class="form-control" type="datetime-local" name="dateFin" id="dateFin"/>
+                    <input type="submit" value="Créer" class="btn btn-outline-success"/>
                 </form>
             </div>
         </div>
         
         <div id="actions">
-            <div class='jumbotron'>
+            <div id="lot_on_sale">
                 <legend><center>Sélectionner un lot en vente</center></legend>
                 <form method="get" action="./lot_dynamique_gestionnaire.php?>" id="form_on_sale">
                     <select type="text" class="form-control" id="lot_on_sale" name="lot_on_sale" required onchange="document.getElementById('form_on_sale').submit();">
@@ -134,7 +135,7 @@
         </form>
     </div>
 
-    <div class='jumbotron'>
+    <div  id="lot_sold">
         <legend><center>Sélectionner un lot vendu</center></legend>
         <form method="get" action="./lot_dynamique_gestionnaire.php?>" id="form_sold">
             <select type="text" class="form-control" id="lot_sold" name="lot_sold" required onchange="document.getElementById('form_sold').submit();">
@@ -154,11 +155,12 @@
             </select>
         </form>
     </div>
+    <input type="button" value="Se déconnecter" onclick="javascript:location.href='./connexion.php'" class="btn btn-outline-danger">
         </div>
 
     
 
-    <input type="button" value="Se déconnecter" onclick="javascript:location.href='./connexion.php'" class="btn btn-outline-danger">
+    
 
     </body>
 </html>

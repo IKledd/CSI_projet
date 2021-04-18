@@ -1,16 +1,21 @@
 <?php
-    require "./bdd.php";
+    require "../fonctions/bdd.php";
     session_start();
     //Cas de la connexion
     if (isset($_POST['login_conn']) && isset($_POST['pwd_conn'])) {
         $login = $_POST['login_conn'];
         $pwd = $_POST['pwd_conn'];
         $bdd = Bdd::getBdd();
+		
+		// supprimer les proposition d'achat des lots avec date de fin > 24 heures
+		$sql = 'call supprimer_propositions()';
+		$req=$bdd->prepare($sql);
+		$req->execute();
 
-        $sql ="select connexion('" . $login . "','" . $pwd . "')";
+        $sql ="select connexion(?,?)";
         echo $sql;
         $req=$bdd->prepare($sql);
-        $req->execute();
+        $req->execute(array($login,$pwd));
         $result = $req->fetch(PDO::FETCH_ASSOC);
     
         if ($result['connexion']=='gestionnaire') {
