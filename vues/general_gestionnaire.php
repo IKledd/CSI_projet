@@ -30,7 +30,7 @@
                     <label class="col-form-label" for="prix">Prix initial</label>
                     <input class="form-control" type="number" step="0.01" min="0" name="prix" id="prix"/>
                     <label class="col-form-label" for="dateSortie">Date de sortie </label>
-                    <input class="form-control" type="datetime-local" name="dateSortie" id="dateSortie"/></br>
+                    <input class="form-control" type="datetime-local" name="dateSortie" id="dateSortie"/><br>
                     <select type="text" class="form-control" name="type_prod" id="type_prod">
                         <?php
                             $bdd = Bdd::getBdd();
@@ -46,7 +46,7 @@
                             }
                         ?>
                     </select>
-                    <input type="submit" class="btn btn-outline-success value="Creer"/>
+                    <input type="submit" class="btn btn-outline-success" value="Creer"/>
                 </form>
             </div>
              <div class="jumbotron" id="add_product_lot">
@@ -67,7 +67,7 @@
                             }
                         ?>
                     </select>
-                    </br>
+                    <br>
                     <select type="text" class="form-control" name="choix_produit" id="choix_produit">
                         <?php
                             $bdd = Bdd::getBdd();
@@ -85,7 +85,7 @@
                     </select>
                     <label class="label_form" for="quantite">Quantité</label>
                     <input class="form-control" type="number" step="1" min="0" name="quantite" id="quantite"/>
-                    <input type="submit" class="btn btn-outline-success value="Ajouter"/>
+                    <input type="submit" class="btn btn-outline-success" value="Ajouter"/>
                 </form>
             </div>
              <div class="jumbotron" id="new_lot">
