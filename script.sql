@@ -570,7 +570,7 @@ begin
         l_prix_plus_haut = 0 ;
         FOR proposition IN
            SELECT max(pro_prix_propose) prix_max, cli_pseudo FROM t_proposition_achat_pro
-            WHERE lot_id = id_lot;
+            WHERE lot_id = id_lot
             GROUP BY cli_pseudo ,pro_date_proposition
 			order by pro_date_proposition Asc 
         LOOP
