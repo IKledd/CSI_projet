@@ -16,6 +16,25 @@ session_start();
 	  $req=$bdd->prepare($sql);
          $req->execute(array($com_solde,$com_idcompte));
 	}
+	
+    if (isset($_GET['action']) && isset($_GET['lot_id'])) {
+		$lot_id = $_POST['lot_id'];
+		if ($_GET['action'] = 'refuserAchat') {
+			 $sql = 'call refuser_achat(?)';
+				$bdd = Bdd::getBdd();
+				$req=$bdd->prepare($sql);
+				$req->execute(array($lot_id));
+			
+		}
+		if ($_GET['action'] = 'confirmerAchat') {
+			 $sql = 'call achat_achat(?)';
+				$bdd = Bdd::getBdd();
+				$req=$bdd->prepare($sql);
+				$req->execute(array($lot_id));
+			
+		}	
+    
+	}
 	//header('Location: ../vues/general_client');
 	?>
 	

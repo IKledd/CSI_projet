@@ -6,13 +6,18 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Home page</title>
-        <link rel="stylesheet" type="text/css" href="../styles/homePage.css">
+		<title>client page</title>
+		<link rel="stylesheet" type="text/css" href="../styles/client.css">
+		
+		
+   
         <meta charset="utf-8"/>
     </head>
     <body>
-        <div id="menuBar">
-		<div class="menuButton">
+	<div class="row">
+
+        <div >
+		<div>
 		                <?php
                             $bdd = Bdd::getBdd();
 							$com_idcompte = 0;
@@ -29,22 +34,53 @@
                                 echo "</option>";   */
                             }
                         ?>
-                <legend><center>Modifier solde</center></legend>
+                <h1>Modifier solde</h1>
                 <form method="post" action="../fonctions/traitementClient.php">
                             
-                    <label class="label_form" for="solde">Ajouter au solde</label>
-                    <input class="form_input" type="text" name="com_solde" id="solde"/>
+                    <label for="solde">Ajouter au solde</label>
+                    <input  type="text" name="com_solde" id="solde"/>
                     <input type="hidden" name="com_compte" id="compte" value ="<?=$com_idcompte?>"/>
                     <input type="submit" value="Modifier"/>
 
                 </form>
 				Solde : <?php echo $com_solde ?>
-            </div>
-		</div>
+        </div>
+		<div ">
+		<br>
+			<h1>Lots à confirmer</h1>
+			<table id="customers">
+				<tr>
+					<td>Lot N°</td>
+					<td>Prix d'achat</td>
+					<td>Actions</td>
+				</tr>
+			<?php
+				$sql ="select lot_id , lot_etat, lot_prix_achat 
+					from t_lot_lot 
+					where lot_gagnant = ?
+					and lot_etat = 'a confirmer'";
+				$req=$bdd->prepare($sql);
+				$req->execute(array($_SESSION['pseudo']));
+				while ($row = $req->fetch(PDO::FETCH_ASSOC)) {
+					echo '<tr>';
+					echo '	<td>'. $row['lot_id'] . '</td>';
+					echo '	<td>'. $row['lot_prix_achat'] . '</td>';
+					echo '	<td><a href="../fonctions/traitementClient.php?action=confirmerAchat&lot_id=' . $row['lot_id'] . '" >Confirmer</a> &nbsp;'; 
+					echo '      <a href="../fonctions/traitementClient.php?action=refuserAchat&lot_id=' . $row['lot_id'] . '" >Refuser</a>';
+					echo '  </td>';
+					echo '</tr>';
+				}
+			?>
+			</table>
 
+        </div>
+		</div>
+	</div>
 		<div id="actions">
+					<h1>Consulter les lots</h1>
+
 				<div class='jumbotron'>
-					<legend><center>Sélectionner un lot en vente</center></legend>
+					<legend>Sélectionner un lot en vente</legend><br>
 					<form method="get" action="./lot_dynamique_gestionnaire.php?>" id="form_on_sale">
 						<select type="text" class="form-control" id="lot_on_sale" name="lot_on_sale" required onchange="document.getElementById('form_on_sale').submit();">
 							<?php
@@ -64,7 +100,7 @@
 				</div>
 
 				<div class='jumbotron'>
-					<legend><center>Sélectionner un lot vendu</center></legend>
+					<legend>Sélectionner un lot vendu</legend><br>
 					<form method="get" action="./lot_dynamique_gestionnaire.php?>" id="form_sold">
 						<select type="text" class="form-control" id="lot_sold" name="lot_sold" required onchange="document.getElementById('form_sold').submit();">
 						<?php
