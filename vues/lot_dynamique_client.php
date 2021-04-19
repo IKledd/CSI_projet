@@ -2,6 +2,7 @@
 require "../fonctions/bdd.php";
 require "../fonctions/statusClient.php";
 $bdd = Bdd::getBdd();
+$lot = 1; 
 if(!isset($_GET['lot_on_sale']) && !isset($_GET['lot_sold'])){
     echo 'Pas de lot sélectionné';
 }else{
@@ -39,6 +40,7 @@ if(!isset($_GET['lot_on_sale']) && !isset($_GET['lot_sold'])){
 
         <?php 
             $sql ="SELECT * FROM v_affichage_client WHERE lot_id= ".$lot;
+            //$sql=SELECT DISTINCT pro_prix_propose,lot_date_debut_vente,lot_date_fin_vente,lot_prix_estime,pro_prix_propose,pro_nombre_modification,pro_date_proposition,lot_prix_achat FROM v_affichage_client WHERE lot_id= 1 AND cli_pseudo='ernesto1'
             $req=$bdd->prepare($sql);
             $req->execute();
             $result = $req->fetch(PDO::FETCH_ASSOC);
