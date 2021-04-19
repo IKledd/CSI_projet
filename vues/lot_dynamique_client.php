@@ -49,7 +49,7 @@ else if(isset($_GET['lot_sold'])){
             if( $row['gagnant'] = $row['pseudo'])
             echo "Vous êtes éligible à l'achat du lot" .$row['lot_id']."Vous devez confirmer son achat";
             //button pour changer la confirmation de faux à vrai
-            echo "<button onclick=" pro_confirmation FROM t_proposition_achat_pro WHERE pro.lot_id=lot_id into">Click Here</button> "
+            /*echo "<button onclick=" pro_confirmation FROM t_proposition_achat_pro WHERE pro.lot_id=lot_id into">Click Here</button> ";*/
 
 
               
