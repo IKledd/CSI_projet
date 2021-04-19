@@ -1,6 +1,6 @@
 <?php
 require "../fonctions/bdd.php";
-require "../fonctions/statusClient.php";
+require "../fonctions/statusGestionnaire.php";
 $bdd = Bdd::getBdd();
 if(!isset($_GET['lot_on_sale']) && !isset($_GET['lot_sold'])){
     echo 'Pas de lot sélectionné';
@@ -123,14 +123,6 @@ if(!isset($_GET['lot_on_sale']) && !isset($_GET['lot_sold'])){
            
         <input type="button" value="Retourner à votre page" onclick="javascript:location.href='./general_gestionnaire.php'" class="btn btn-outline-danger">
 
-              
-        
-         <!-- //Proposer un prix(page de lot dynamique)
-         
-
-         //Modifier proposition (à la hausse)(page de lot dynamique)
- -->
-        
 
         
         </div>
