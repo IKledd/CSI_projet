@@ -172,6 +172,7 @@ execute procedure check_prix_achat();
 
 insert into t_lot_lot(lot_date_debut_vente,lot_date_fin_vente,lot_prix_estime,lot_prix_minimal) values('2021-04-06 04:05:06','2021-05-06 04:05:06',12,10);
 insert into t_lot_lot(lot_date_debut_vente,lot_date_fin_vente,lot_prix_estime,lot_prix_minimal) values('2021-04-08 04:05:06','2021-05-10 04:05:06',120,100);
+insert into t_lot_lot(lot_date_debut_vente,lot_date_fin_vente, lot_etat, lot_prix_estime,lot_prix_minimal) values('2021-04-06 04:05:06','2021-05-06 04:05:06', 'en vente',12,10);
 
 -----------------------------------------------------------------
 
