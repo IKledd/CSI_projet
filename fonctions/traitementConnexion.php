@@ -12,6 +12,11 @@
 		$req=$bdd->prepare($sql);
 		$req->execute();
 
+        // Analyser les propositions pour designer un gagnant pour les lot terminés
+		$sql = 'call analyse_lots()';
+		$req=$bdd->prepare($sql);
+		$req->execute();
+
         $sql ="select connexion(?,?)";
         echo $sql;
         $req=$bdd->prepare($sql);
