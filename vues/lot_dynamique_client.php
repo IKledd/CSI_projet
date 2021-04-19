@@ -40,7 +40,8 @@ if(!isset($_GET['lot_on_sale']) && !isset($_GET['lot_sold'])){
     <body>
 
         <?php 
-            $sql ="SELECT * FROM v_affichage_client WHERE lot_id= ".$lot. " AND cli_pseudo='".$_SESSION['pseudo']."'";
+            //$sql ="SELECT * FROM v_affichage_client WHERE lot_id= ".$lot. " AND cli_pseudo='".$_SESSION['pseudo']."'";
+            $sql ="SELECT * FROM t_proposition_achat_pro WHERE lot_id= ".$lot. " AND cli_pseudo='".$_SESSION['pseudo']."'";
             //$sql=SELECT DISTINCT pro_prix_propose,lot_date_debut_vente,lot_date_fin_vente,lot_prix_estime,pro_prix_propose,pro_nombre_modification,pro_date_proposition,lot_prix_achat FROM v_affichage_client WHERE lot_id= 1 AND cli_pseudo='ernesto1'
             $req=$bdd->prepare($sql);
             $req->execute();
