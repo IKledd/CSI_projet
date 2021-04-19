@@ -2,7 +2,6 @@
 require "../fonctions/bdd.php";
 require "../fonctions/statusClient.php";
 $bdd = Bdd::getBdd();
-$lot = 1; 
 if(!isset($_GET['lot_on_sale']) && !isset($_GET['lot_sold'])){
     echo 'Pas de lot sélectionné';
 }else{
