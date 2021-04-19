@@ -7,8 +7,6 @@
 <html>
     <head>
 		<title>client page</title>
-		<!-- <link rel="stylesheet" type="text/css" href="../styles/client.css"> -->
-		<link rel="icon" type="image/png" href="./../images/favicon.png" />
 		<link rel="stylesheet" type="text/css" href="../styles/client.css"> 
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -44,20 +42,22 @@
                                 echo "</option>";   */
                             }
                         ?>
+				
       			<?php echo '<p >Solde : '. $com_solde .'<p>'; ?>
+
                 <form method="post" action="../fonctions/traitementClient.php">
                             
                     <label for="solde" class="col-form-label">Ajouter au solde</label>
-                    <input  type="number"  name="com_solde" id="solde" class="form-control" step="0.01" min="0"/>
+                    <input  type="number"  name="com_solde" id="solde" class="form-control" step="0.01" required />
                     <input type="hidden" name="com_compte" id="compte" class="col-form-label" value ="<?=$com_idcompte?>"/>
                     <input type="submit"  class="btn btn-outline-success "value="Modifier"/>
 
                 </form>
-				
+
         </div>
 		<div>
 		<br>
-			<p>Lots à confirmer</p>
+			<p >Lots à confirmer</p>
 			<table class="table table-striped">
 				<tr>
 					<td>Lot N°</td>
@@ -128,9 +128,12 @@
 						?>
 						</select>
 					</form>
+					
 				</div>
+
         </div>
             
-        <input type="button" value="Se déconnecter" onclick="javascript:location.href='./connexion.php'" class="btn btn-outline-danger">
+       		<input type="button" value="Se déconnecter" onclick="javascript:location.href='./connexion.php'" class="btn btn-outline-danger">
+
     </body>
 </html>

@@ -622,13 +622,24 @@ $$ language plpgsql;
 create or replace procedure confirmer_achat(id_lot integer) as $$
 declare 
 l_gagnant t_proposition_achat_pro.cli_pseudo%type;
+idcompte t_compte_courant_com.com_idcompte%type;
+prix_achat t_lot_lot.lot_prix_achat%type;
 
 begin
     select lot_gagnant into l_gagnant from t_lot_lot where lot_id=id_lot;
+	select lot_prix_achat into prix_achat from t_lot_lot where lot_id=id_lot;
+	select com_idcompte into idcompte from t_lot_lot lot ,t_client_cli cli 
+	where cli.cli_pseudo = lot.lot_gagnant and lot.lot_id=id_lot;
+
 		if(l_gagnant is not null)then
 			update t_lot_lot
 			set lot_etat = 'gagne'
 			where lot_id=id_lot;
+			update t_compte_courant_com
+			set com_solde = com_solde - prix_achat
+			where idcompte=id_lot;
+
+
 		end if;
 end
 $$ language plpgsql;
@@ -647,6 +658,23 @@ where lot_id = id_lot;
 call analyse_propositions(id_lot);
 end
 $$ language plpgsql;
+
+--mise en vente
+create or replace procedure mise_vente( ) as $$
+declare 
+ 
+lot RECORD;
+begin
+	  FOR lot IN
+	  select lot_prix_minimal, lot_prix_estime, lot_date_fin_vente,lot_date_debut_vente from t_lot_lot
+		where lot_etat='en attente' and lot_date_debut_vente= current_date 
+	LOOP
+		call mise_en_vente(lot.lot_prix_minimal,lot.lot_prix_estime,lot.lot_date_fin_vente,lot.lot_date_debut_vente);
+	END LOOP;
+end
+$$ language plpgsql;
+
+
 
 
 -----------------------------------------------------------------
