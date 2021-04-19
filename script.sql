@@ -616,8 +616,6 @@ begin
 		call analyse_propositions(r_lot.lot_id);
 	END LOOP;
 end
-
-end
 $$ language plpgsql;
 
 --confirmer_achat
@@ -633,8 +631,6 @@ begin
 			where lot_id=id_lot;
 		end if;
 end
-
-end
 $$ language plpgsql;
 
 --refuser_achat
@@ -649,8 +645,6 @@ SET lot_gagnant = null
 where lot_id = id_lot;
 
 call analyse_propositions(id_lot);
-end
-
 end
 $$ language plpgsql;
 
