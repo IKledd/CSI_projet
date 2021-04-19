@@ -548,7 +548,7 @@ begin
 end
 $$ language plpgsql;
 
---supprime toutes les propositions d'un lot sous certaines conditions
+--supprimer toutes les propositions d'un lot sous certaines conditions
 create or replace procedure supprimer_propositions(id_lot integer) as $$
 declare 
 l_date_fin_lot t_lot_lot.lot_date_fin_vente%type ;
@@ -560,7 +560,7 @@ begin
     end if;
 end
 $$ language plpgsql;
------ new supprimer propositions
+-- supprimer propositions
 create  or replace procedure supprimer_propositions() as $$
 declare 
 begin
@@ -569,7 +569,7 @@ where lot_id in (select lot_id from t_lot_lot where current_date > (lot_date_fin
 end
 $$ language plpgsql;
 
---analyse des propositions
+--analyse des propositions d'un lot sous certaines conditions
 create or replace procedure Analyse_propositions(id_lot integer) as $$
 declare 
 proposition RECORD;
@@ -600,6 +600,57 @@ begin
 			else call remettre_en_vente_lot(id_lot);
         end if;
     end if;
+end
+$$ language plpgsql;
+
+--analyse des propositions (lot_id)
+create or replace procedure Analyse_propositions(id_lot integer) as $$ 
+declare 
+r_lot RECORD;
+begin
+	FOR r_lot IN
+	   SELECT lot_id FROM t_lot_lot
+		WHERE lot_date_fin_vente < current_date
+		and lot_gagnant is null
+	LOOP
+		call analyse_propositions(r_lot.lot_id);
+	END LOOP;
+end
+
+end
+$$ language plpgsql;
+
+--confirmer_achat
+create or replace procedure Analyse_propositions(id_lot integer) as $$
+declare 
+l_gagnant t_proposition_achat_pro.cli_pseudo%type;
+
+begin
+    select lot_gagnant into l_gagnant from t_lot_lot where lot_id=id_lot;
+		if(l_gagnant is not null)then
+			update t_lot_lot
+			set lot_etat = 'gagne'
+			where lot_id=id_lot;
+		end if;
+end
+
+end
+$$ language plpgsql;
+
+--refuser_achat
+create or replace procedure Analyse_propositions(id_lot integer) as $$
+declare 
+begin
+DELETE FROM t_proposition_achat_pro 
+WHERE (cli_pseudo, lot_id) = ( select lot_gagnant,lot_id from t_lot_lot
+							   where lot_id = id_lot);
+UPDATE t_lot_lot 
+SET lot_gagnant = null
+where lot_id = id_lot;
+
+call analyse_propositions(id_lot);
+end
+
 end
 $$ language plpgsql;
 
