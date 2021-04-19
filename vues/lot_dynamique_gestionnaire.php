@@ -38,7 +38,7 @@ if(!isset($_GET['lot_on_sale']) && !isset($_GET['lot_sold'])){
     <body>
 
         <?php 
-            $sql ="SELECT * FROM v_affichage_gestionnaire WHERE lot_id= ".$lot;
+            $sql ="SELECT * FROM t_lot_lot WHERE lot_id= ".$lot;
             $req=$bdd->prepare($sql);
             $req->execute();
             $result = $req->fetch(PDO::FETCH_ASSOC);
