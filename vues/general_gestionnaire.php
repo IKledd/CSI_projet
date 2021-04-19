@@ -8,6 +8,7 @@
     <head>
         <title>Composer votre lot</title>
         <link rel="stylesheet" type="text/css" href="../styles/general_gestionnaire.css"> 
+        <link rel="icon" type="image/png" href="./../images/favicon.png" />
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -30,7 +31,7 @@
                     <label class="col-form-label" for="prix">Prix initial</label>
                     <input class="form-control" type="number" step="0.01" min="0" name="prix" id="prix"/>
                     <label class="col-form-label" for="dateSortie">Date de sortie </label>
-                    <input class="form-control" type="datetime-local" name="dateSortie" id="dateSortie"/></br>
+                    <input class="form-control" type="datetime-local" name="dateSortie" id="dateSortie"/><br>
                     <select type="text" class="form-control" name="type_prod" id="type_prod">
                         <?php
                             $bdd = Bdd::getBdd();
@@ -46,7 +47,7 @@
                             }
                         ?>
                     </select>
-                    <input type="submit" class="btn btn-outline-success value="Creer"/>
+                    <input type="submit" class="btn btn-outline-success" value="Creer"/>
                 </form>
             </div>
              <div class="jumbotron" id="add_product_lot">
@@ -67,7 +68,7 @@
                             }
                         ?>
                     </select>
-                    </br>
+                    <br>
                     <select type="text" class="form-control" name="choix_produit" id="choix_produit">
                         <?php
                             $bdd = Bdd::getBdd();
