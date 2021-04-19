@@ -3,17 +3,19 @@ require "../fonctions/bdd.php";
 require "../fonctions/statusClient.php";
 $bdd = Bdd::getBdd();
 $lot = 1; 
-if(isset($_GET['lot_on_sale'])){
-   $lot = $_GET['lot_on_sale'];
-   $etat='en vente';
-}
-else if(isset($_GET['lot_sold'])){
-    $lot = $_GET['lot_sold'];
-    $etat='gagne';
-} 
-else{
-    //header('Location: ./general_client.php');
-}
+if(!isset($_GET['lot_on_sale']) && !isset($_GET['lot_sold'])){
+    echo 'Pas de lot sélectionné';
+}else{
+    if(isset($_GET['lot_on_sale'])){
+        $lot = $_GET['lot_on_sale'];
+        $etat='en vente';
+    }
+    else if(isset($_GET['lot_sold'])){
+        $lot = $_GET['lot_sold'];
+        $etat='gagne';
+    } 
+
+
 ?>
 
 
@@ -141,3 +143,5 @@ else{
         </div>
     </body>
 </html>
+
+<?php } ?>
