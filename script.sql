@@ -603,8 +603,8 @@ begin
 end
 $$ language plpgsql;
 
---analyse des propositions (lot_id)
-create or replace procedure Analyse_propositions(id_lot integer) as $$ 
+--analyse des propositions 
+create or replace procedure analyse_lots() as $$ 
 declare 
 r_lot RECORD;
 begin
@@ -619,7 +619,7 @@ end
 $$ language plpgsql;
 
 --confirmer_achat
-create or replace procedure Analyse_propositions(id_lot integer) as $$
+create or replace procedure confirmer_achat(id_lot integer) as $$
 declare 
 l_gagnant t_proposition_achat_pro.cli_pseudo%type;
 
@@ -634,7 +634,7 @@ end
 $$ language plpgsql;
 
 --refuser_achat
-create or replace procedure Analyse_propositions(id_lot integer) as $$
+create or replace procedure refuser_achat(id_lot integer) as $$
 declare 
 begin
 DELETE FROM t_proposition_achat_pro 
