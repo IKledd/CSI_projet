@@ -382,6 +382,7 @@ $$ language plpgsql;
 --proposition de prix d'un client sur un lot
 create or replace procedure proposer_prix(idlot integer, prix integer, pseudo longueur,dat timestamp default current_timestamp) as $$
 declare 
+declare 
 begin
 	
 	if (select lot_id from t_lot_lot where lot_id=idlot) is null then
@@ -390,7 +391,7 @@ begin
 	if (select cli_pseudo from t_client_cli where cli_pseudo=pseudo) is null then
 		raise exception E'Ce client n\'existe pas';
 	end if;
-	if (select 1 from t_proposition_achat_pro where pro_nombre_modification>=2 and lot_id=idlot and cli_pseudo=pseudo) is not null then
+	if (select 1 from t_proposition_achat_pro where pro_nombre_modification>=2 and lot_id=idlot and cli_pseudo=pseudo GROUP BY cli_pseudo) is not null then
 		raise exception E'Vous ne pouvez plus modifier le prix de votre proposition';
 	end if;
 	if (select 1 from t_lot_lot where lot_date_debut_vente>=current_timestamp and lot_date_fin_vente<=current_timestamp and lot_id=idlot) is not null then
@@ -399,14 +400,15 @@ begin
 	if ((select com_solde from t_compte_courant_com,t_client_cli where t_compte_courant_com.com_idcompte=t_client_cli.com_idcompte and cli_pseudo=pseudo)<prix) then
 		raise exception E'Votre solde n\'est pas suffisante, veuillez réapprovisionner.';
 	end if;
-	if ((select pro_prix_propose from t_proposition_achat_pro where cli_pseudo=pseudo and lot_id=idlot)>prix) then
+	if ((select max(pro_prix_propose) from t_proposition_achat_pro where cli_pseudo=pseudo and lot_id=idlot GROUP BY cli_pseudo)>prix) then
 		raise exception E'Votre prix est inférieur à celui de votre proposition passée.';
 	end if;
-	if(select 1 from t_proposition_achat_pro where cli_pseudo=pseudo and lot_id=idlot)is null then
+	if(select 1 from t_proposition_achat_pro where cli_pseudo=pseudo and lot_id=idlot GROUP BY cli_pseudo)is null then
 		insert into t_proposition_achat_pro(lot_id,cli_pseudo,pro_prix_propose,pro_date_proposition) values(idlot,pseudo,prix,dat);
-		else update t_proposition_achat_pro set pro_nombre_modification=((select pro_nombre_modification from t_proposition_achat_pro where cli_pseudo=pseudo and lot_id=idlot)+1),pro_prix_propose=prix,pro_date_proposition=dat where cli_pseudo=pseudo and lot_id=idlot;
+		else update t_proposition_achat_pro set pro_nombre_modification=((select pro_nombre_modification from t_proposition_achat_pro where cli_pseudo=pseudo and lot_id=idlot GROUP BY pro_nombre_modification)+1),pro_prix_propose=prix,pro_date_proposition=dat where cli_pseudo=pseudo and lot_id=idlot;
 	end if;
 end
+
 $$ language plpgsql;
 
 --recherche si un lot existe et est en vente renvoie un booléen

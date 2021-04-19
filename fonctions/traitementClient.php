@@ -35,6 +35,6 @@ session_start();
 		}	
     
 	}
-	//header('Location: ../vues/general_client');
+	header('Location: ../vues/general_client');
 	?>
 	

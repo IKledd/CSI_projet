@@ -130,6 +130,6 @@
 				</div>
         </div>
             
-       
+        <input type="button" value="Se déconnecter" onclick="javascript:location.href='./connexion.php'" class="btn btn-outline-danger">
     </body>
 </html>
