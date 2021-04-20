@@ -102,7 +102,7 @@ if(!isset($_GET['lot_on_sale']) && !isset($_GET['lot_sold'])){
                 </tr>
                 <?php 
                 //DISTINCT?
-                    $sql2 ="select cli_pseudo,pro_prix_propose,pro_nombre_modification,pro_date_proposition from v_affichage_gestionnaire where lot_id=".$lot;
+                    $sql2 ="select cli_pseudo,pro_prix_propose,pro_nombre_modification,pro_date_proposition from t_proposition_achat_pro where lot_id=".$lot;
                     $req2=$bdd->prepare($sql2);
                     $req2->execute();
                     while($row = $req2->fetch(PDO::FETCH_ASSOC)){

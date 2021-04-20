@@ -127,7 +127,7 @@ if(!isset($_GET['lot_on_sale']) && !isset($_GET['lot_sold'])){
                     <td>Date de sortie</td>
                 </tr>
                 <?php 
-                    $sql2 ="select distinct prod_id,tprod_libelle,qprod_quantite,prod_marque,prod_datecreation from v_affichage_client where lot_id=".$lot;
+                    $sql2 ="select distinct q.prod_id,tprod_libelle,qprod_quantite,prod_marque,prod_datecreation from t_produit_prod as pr,t_quantite_qprod as q,t_type_produit_tprod as tp where pr.tprod_id=tp.tprod_id and tp.tprod_id=q.prod_id and lot_id=".$lot;
                     $req2=$bdd->prepare($sql2);
                     $req2->execute();
                     while($row = $req2->fetch(PDO::FETCH_ASSOC)){

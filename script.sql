@@ -34,6 +34,10 @@ CREATE TABLE T_compte_courant_COM (
 
 insert into t_compte_courant_COM(com_solde) VALUES(1000);
 insert into t_compte_courant_COM(com_solde) VALUES(10);
+insert into t_compte_courant_COM(com_solde) VALUES(10);
+insert into t_compte_courant_COM(com_solde) VALUES(10);
+insert into t_compte_courant_COM(com_solde) VALUES(10);
+insert into t_compte_courant_COM(com_solde) VALUES(10);
 
 -----------------------------------------------------------------
 
@@ -48,6 +52,10 @@ CREATE TABLE T_Client_CLI (
 
 insert into t_client_cli(cli_pseudo,cli_nom,cli_prenom,cli_mdp,com_idcompte) values('ernesto1','dillen','ernesto','ernesto1',1);
 insert into t_client_cli(cli_pseudo,cli_nom,cli_prenom,cli_mdp,com_idcompte) values('corentin','uhl','corentin','corentin',2);
+insert into t_client_cli(cli_pseudo,cli_nom,cli_prenom,cli_mdp, com_idcompte) values('alielhssini','elhssini','alielhssini','password', 3);
+insert into t_client_cli(cli_pseudo,cli_nom,cli_prenom,cli_mdp, com_idcompte) values('jaber123','benkirane','jaberbenk','jaberbenk', 4);
+insert into t_client_cli(cli_pseudo,cli_nom,cli_prenom,cli_mdp, com_idcompte) values('paulo_ko','kolbert','polkol','motdepasse', 5);
+insert into t_client_cli(cli_pseudo,cli_nom,cli_prenom,cli_mdp, com_idcompte) values('cloclo07','poirotte','clopoirotte','monchatestbeau', 6);
 
 -----------------------------------------------------------------
 
@@ -170,9 +178,12 @@ $$ language plpgsql;
 create trigger ti_check_prix_achat before update on t_lot_lot for each row
 execute procedure check_prix_achat();
 
-insert into t_lot_lot(lot_date_debut_vente,lot_date_fin_vente,lot_prix_estime,lot_prix_minimal) values('2021-04-06 04:05:06','2021-05-06 04:05:06',12,10);
+insert into t_lot_lot(lot_date_debut_vente,lot_date_fin_vente,lot_prix_estime,lot_prix_minimal) values('2021-04-06 04:05:06','2021-09-06 04:05:06',12,10);
 insert into t_lot_lot(lot_date_debut_vente,lot_date_fin_vente,lot_prix_estime,lot_prix_minimal) values('2021-04-08 04:05:06','2021-05-10 04:05:06',120,100);
-insert into t_lot_lot(lot_date_debut_vente,lot_date_fin_vente, lot_etat, lot_prix_estime,lot_prix_minimal) values('2021-04-06 04:05:06','2021-05-06 04:05:06', 'en vente',12,10);
+insert into t_lot_lot(lot_date_debut_vente,lot_date_fin_vente, lot_etat, lot_prix_estime,lot_prix_minimal) values('2021-04-06 04:05:06','2021-12-06 04:05:06', 'en vente',12,10);
+insert into t_lot_lot(lot_date_debut_vente,lot_date_fin_vente, lot_etat, lot_prix_estime,lot_prix_minimal) values('2021-04-25 00:00:00','2021-05-12 23:59:59', 'en vente', 57, 42);
+insert into t_lot_lot(lot_date_debut_vente,lot_date_fin_vente, lot_etat, lot_nombre_remise_vente, lot_prix_estime,lot_prix_minimal, lot_gagnant, lot_prix_achat) values('2021-04-25 00:00:00','2021-05-12 04:05:06', 'a confirmer', 1, 410, 380, 'paulo_ko', 500);
+insert into t_lot_lot(lot_date_debut_vente,lot_date_fin_vente, lot_etat, lot_nombre_remise_vente, lot_prix_estime,lot_prix_minimal, lot_gagnant, lot_prix_achat) values('2021-11-21 12:00:00','2022-05-12 12:00:00', 'a confirmer', 0, 1500, 1450, 'cloclo07', 1672);
 
 -----------------------------------------------------------------
 
@@ -261,6 +272,7 @@ execute procedure check_date_inscription();
 
 insert into t_proposition_achat_pro(lot_id,cli_pseudo,pro_prix_propose) values(1,'ernesto1',100);
 insert into t_proposition_achat_pro(lot_id,cli_pseudo,pro_prix_propose) values(1,'ernesto1',300);
+insert into t_proposition_achat_pro(lot_id,cli_pseudo,pro_prix_propose) values(3,'corentin',300);
 
 -----------------------------------------------------------------
 
@@ -269,8 +281,10 @@ CREATE TABLE T_Type_Produit_TPROD(
  TPROD_libelle varchar(50) UNIQUE NOT NULL
 );
 
-insert into t_type_produit_tprod(tprod_libelle) values('test');
+insert into t_type_produit_tprod(tprod_libelle) values('hauts');
 insert into t_type_produit_tprod(tprod_libelle) values('chaussures');
+insert into t_type_produit_tprod(tprod_libelle) values('materiel informatique');
+insert into t_type_produit_tprod(tprod_libelle) values('photo');
 
 -----------------------------------------------------------------
 
@@ -282,8 +296,14 @@ CREATE TABLE T_Produit_PROD(
  TPROD_id int NOT NULL REFERENCES T_Type_Produit_TPROD(TPROD_id) 
 );
 
-insert into t_produit_prod(tprod_id,prod_marque,prod_prix_initial) values (1,'nike',2);
+insert into t_produit_prod(tprod_id,prod_marque,prod_prix_initial) values (2,'nike',2);
 insert into t_produit_prod(tprod_id,prod_marque,prod_prix_initial) values (2,'kalenji',200);
+insert into t_produit_prod(tprod_id,prod_marque,prod_prix_initial) values (3,'obs',55);
+insert into t_produit_prod(tprod_id,prod_marque,prod_prix_initial) values (4,'nikone',895);
+insert into t_produit_prod(tprod_id,prod_marque,prod_prix_initial) values (4,'photodepro',12);
+insert into t_produit_prod(tprod_id,prod_marque,prod_prix_initial) values (3,'asuse',365);
+insert into t_produit_prod(tprod_id,prod_marque,prod_prix_initial) values (3,'photaushop',250);
+insert into t_produit_prod(tprod_id,prod_marque,prod_prix_initial) values (1,'supraime',99);
 
 -----------------------------------------------------------------
 
@@ -294,8 +314,17 @@ CREATE TABLE T_quantite_QPROD(
  PRIMARY KEY(PROD_id,LOT_id)
 );
 
-insert into t_quantite_qprod values(1,1,5);
-insert into t_quantite_qprod values(2,2,7);
+insert into t_quantite_qprod values(1,1,24);
+insert into t_quantite_qprod values(5,1,3);
+insert into t_quantite_qprod values(6,2,1);
+insert into t_quantite_qprod values(1,3,2);
+insert into t_quantite_qprod values(2,3,3);
+insert into t_quantite_qprod values(8,3,1);
+insert into t_quantite_qprod values(3,4,1);
+insert into t_quantite_qprod values(6,4,12);
+insert into t_quantite_qprod values(7,4,5);
+insert into t_quantite_qprod values(4,5,3);
+insert into t_quantite_qprod values(5,5,45);
 
 --interdit la mise à jour sur la table T_quantite_QPROD
 create or replace function modification_qte_lot() returns trigger as $$
@@ -687,6 +716,7 @@ CREATE VIEW v_affichage_client AS
 	pr.tprod_id,tprod_libelle,qprod_quantite
     FROM t_lot_lot as l, t_proposition_achat_pro as pa,t_produit_prod as pr,t_quantite_qprod as q,t_type_produit_tprod as tp
     WHERE l.lot_id=pa.lot_id and pr.tprod_id=tp.tprod_id and pr.tprod_id=q.prod_id and l.lot_id=q.lot_id;
+
 
 --vue à destination du gestionnaire
 CREATE VIEW v_affichage_gestionnaire AS
