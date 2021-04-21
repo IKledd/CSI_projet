@@ -97,7 +97,7 @@ create table T_lot_LOT
  LOT_prix_estime positif_decimal DEFAULT '0' , 
  LOT_prix_minimal positif_decimal DEFAULT '0' check(LOT_prix_minimal <= LOT_prix_estime),
  LOT_gagnant longueur DEFAULT Null REFERENCES T_client_CLI(CLI_pseudo),
- LOT_prix_achat positif_decimal  DEFAULT '0'  
+ LOT_prix_achat positif_decimal NULL
  );
 
 --vérifie que le gagnant est renseigné si le lot est vendu
@@ -583,7 +583,7 @@ declare
 l_date_fin_lot t_lot_lot.lot_date_fin_vente%type ;
 begin
     select lot_date_fin_vente into l_date_fin_lot from t_lot_lot where lot_id=id_lot;
-    if(current_date > (l_date_fin_lot + INTERVAL '1 DAY')) then
+    if(current_timestamp > (l_date_fin_lot + INTERVAL '1 DAY')) then
         delete from t_proposition_achat_pro
         where t_proposition_achat_pro.lot_id = id_lot;
     end if;
@@ -594,7 +594,7 @@ create  or replace procedure supprimer_propositions() as $$
 declare 
 begin
 delete from t_proposition_achat_pro
-where lot_id in (select lot_id from t_lot_lot where current_date > (lot_date_fin_vente + INTERVAL '1 DAY'));
+where lot_id in (select lot_id from t_lot_lot where current_timestamp > (lot_date_fin_vente + INTERVAL '1 DAY'));
 end
 $$ language plpgsql;
 
@@ -608,7 +608,7 @@ l_prix_minimal t_lot_lot.lot_prix_minimal%type;
 l_date_fin_lot t_lot_lot.lot_date_fin_vente%type;
 begin
     select lot_prix_minimal,lot_date_fin_vente into l_prix_minimal,l_date_fin_lot from t_lot_lot where lot_id=id_lot;
-    if(l_date_fin_lot <= current_date ) then
+    if(l_date_fin_lot <= current_timestamp ) then
         l_prix_plus_haut = 0 ;
         FOR proposition IN
            SELECT max(pro_prix_propose) prix_max, cli_pseudo FROM t_proposition_achat_pro
@@ -639,7 +639,7 @@ r_lot RECORD;
 begin
 	FOR r_lot IN
 	   SELECT lot_id FROM t_lot_lot
-		WHERE lot_date_fin_vente < current_date
+		WHERE lot_date_fin_vente < current_timestamp
 		and lot_gagnant is null
 	LOOP
 		call analyse_propositions(r_lot.lot_id);
@@ -666,7 +666,7 @@ begin
 			where lot_id=id_lot;
 			update t_compte_courant_com
 			set com_solde = com_solde - prix_achat
-			where idcompte=id_lot;
+			where com_idcompte=idcompte;
 
 
 		end if;
@@ -680,26 +680,21 @@ begin
 DELETE FROM t_proposition_achat_pro 
 WHERE (cli_pseudo, lot_id) = ( select lot_gagnant,lot_id from t_lot_lot
 							   where lot_id = id_lot);
-UPDATE t_lot_lot 
+/*UPDATE t_lot_lot 
 SET lot_gagnant = null
-where lot_id = id_lot;
+where lot_id = id_lot;*/
 
 call analyse_propositions(id_lot);
 end
 $$ language plpgsql;
 
 --mise en vente
-create or replace procedure mise_vente( ) as $$
+create or replace procedure mise_vente() as $$
 declare 
  
 lot RECORD;
 begin
-	  FOR lot IN
-	  select lot_prix_minimal, lot_prix_estime, lot_date_fin_vente,lot_date_debut_vente from t_lot_lot
-		where lot_etat='en attente' and lot_date_debut_vente= current_date 
-	LOOP
-		call mise_en_vente(lot.lot_prix_minimal,lot.lot_prix_estime,lot.lot_date_fin_vente,lot.lot_date_debut_vente);
-	END LOOP;
+	  update t_lot_lot set lot_etat = 'en vente' where lot_etat= 'en attente' and lot_date_debut_vente <= current_timestamp;
 end
 $$ language plpgsql;
 
