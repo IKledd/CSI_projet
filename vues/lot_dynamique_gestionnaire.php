@@ -98,7 +98,7 @@ if(!isset($_GET['lot_on_sale']) && !isset($_GET['lot_sold'])){
                     <td>Pseudo du client</td>
                     <td>Prix proposé</td>
                     <td>Nombre de modifications du client sur la proposition</td>
-                    <td>Date de la porposition</td>
+                    <td>Date de la proposition</td>
                 </tr>
                 <?php 
                 //DISTINCT?

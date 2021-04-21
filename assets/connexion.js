@@ -19,7 +19,7 @@ function verifPseudo(champ, id) {
     "use strict";
     if (champ.value.length < 8) {
         //surligne(champ, true, id);
-        document.getElementById(id).innerHTML = "*Le nom d'utilisateur dois contenir au moins 8 caractères";
+        document.getElementById(id).innerHTML = "*Le nom d'utilisateur doit contenir au moins 8 caractères";
         return false;
     } else {
         //surligne(champ, false, id);
@@ -30,7 +30,7 @@ function verifPseudo(champ, id) {
 function verifmdp(champ, id) {
     "use strict";
     if (champ.value.length < 8) {
-        document.getElementById(id).innerHTML = "*Le mot de passe dois contenir au moins 8 caractères";
+        document.getElementById(id).innerHTML = "*Le mot de passe doit contenir au moins 8 caractères";
         //surligne(champ, true, id);
         return false;
     } else {
