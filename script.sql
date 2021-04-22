@@ -260,7 +260,7 @@ select lot_date_debut_vente
 from t_lot_lot
 into l_date_debut_vente
 where lot_id= new.lot_id;
-if (l_date_debut_vente >= l_date_inscription) then
+if (l_date_debut_vente <= l_date_inscription) then
     raise exception 'La date_inscription doit-être antérieur à la date de debut de vente';
 end if;
 return new;
