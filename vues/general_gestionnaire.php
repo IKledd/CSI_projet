@@ -72,7 +72,8 @@
                     <select type="text" class="form-control" name="choix_produit" id="choix_produit">
                         <?php
                             $bdd = Bdd::getBdd();
-                            $sql ="SELECT distinct on (prod_id) prod_id, prod_marque, prod_prix_initial, tprod_libelle from t_produit_prod, t_type_produit_tprod";
+                            $sql ="SELECT distinct on (prod_id) prod_id, prod_marque, prod_prix_initial, tprod_libelle from t_produit_prod as a, t_type_produit_tprod as b
+where a.tprod_id = b.tprod_id";
                             echo $sql;
                             $req=$bdd->prepare($sql);
                             $req->execute();
